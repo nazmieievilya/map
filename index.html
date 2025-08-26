@@ -101,20 +101,27 @@
       });
 
       // Tile layer: Before the war
-      const beforeWar = L.maptiler
-        .maptilerLayer({
-          apiKey: key,
-          style: L.maptiler.MapStyle.STREETS, //optional
-        })
-        .addTo(map);
+      const beforeWar = L.tileLayer(
+        `https://api.maptiler.com/maps/bright-v2/{z}/{x}/{y}.png?key=${key}`,
+        {
+          //style URL
+          tileSize: 512,
+          zoomOffset: -1,
+          minZoom: 1,
+          attribution:
+            '\u003ca href="https://www.maptiler.com/copyright/" target="_blank"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href="https://www.openstreetmap.org/copyright" target="_blank"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e',
+          crossOrigin: true,
+        }
+      ).addTo(map);
 
       // Tile layer: Current map (example HOT style)
-      const currentMap = L.maptiler
-        .maptilerLayer({
-          apiKey: key,
-          style: L.maptiler.MapStyle.STREETS, //optional
-        })
-        .addTo(map);
+      const currentMap = L.tileLayer(
+        "https://api.maptiler.com/maps/0198e5cb-be54-7f3f-9367-1d8ff1db14d6/style.json?key=40ctAjlYbSwks22PprOn",
+        {
+          attribution:
+            '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a>',
+        }
+      ).addTo(map);
 
       // Layer control to switch maps
 
@@ -1086,15 +1093,15 @@
       myPolygon1.bindPopup("1918");
       marker.bindPopup(
         `
-      <div style="text-align:center;">
-        <img src="https://anga.ua/files/anga/reg_images/screenshot_1_0046.png" 
-             alt="Kyiv" 
-             class="popup-img"/>
-        <h3 style="margin:2px 0;">Kyiv</h3>
-        
-        <a href="https://uk.wikipedia.org/wiki/%D0%9A%D0%B8%D1%97%D0%B2"><p>Capital of Ukraine 🇺🇦</p></a>
-      </div>
-    `,
+            <div style="text-align:center;">
+              <img src="https://anga.ua/files/anga/reg_images/screenshot_1_0046.png"
+                   alt="Kyiv"
+                   class="popup-img"/>
+              <h3 style="margin:2px 0;">Kyiv</h3>
+
+              <a href="https://uk.wikipedia.org/wiki/%D0%9A%D0%B8%D1%97%D0%B2"><p>Capital of Ukraine 🇺🇦</p></a>
+            </div>
+          `,
         { className: "custom-popup" }
       );
 
