@@ -53,23 +53,34 @@
       const map = L.map("map", {
         center: [48.5, 31.5],
         zoom: 5,
-        maxBounds: ukraineBounds, // restrict map to Ukraine
-        maxBoundsViscosity: 1.0, // prevent dragging outside
+        maxBounds: [
+          [35, 15], // юго-западная точка (примерно)
+          [60, 50], // северо-восточная точка (примерно)
+        ],
+        maxBoundsViscosity: 0, // prevent dragging outside
       });
 
       // Tile layer: Before the war
       const beforeWar = L.tileLayer(
-        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}",
         {
-          attribution: "&copy; OpenStreetMap contributors",
+          minZoom: 5,
+          maxZoom: 20,
+          attribution:
+            '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          ext: "png",
         }
       ).addTo(map);
 
       // Tile layer: Current map (example HOT style)
       const currentMap = L.tileLayer(
-        "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+        "https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.{ext}",
         {
-          attribution: "&copy; OpenStreetMap contributors, HOT",
+          minZoom: 5,
+          maxZoom: 20,
+          attribution:
+            '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          ext: "png",
         }
       );
 
@@ -1019,16 +1030,16 @@
       ].map((e) => [e.lat, e.lng]);
 
       const myPolygon1 = L.polygon(polygonPoints1918, {
-        color: "violet",
-        fillColor: "pink",
-        fillOpacity: 0.3,
+        color: "#46C767",
+        fillColor: "#46C767",
+        fillOpacity: 0.15,
         weight: 2,
       });
 
       const myPolygon2 = L.polygon(polygonPoints2025, {
-        color: "violet",
-        fillColor: "pink",
-        fillOpacity: 0.3,
+        color: "#46C767",
+        fillColor: "#46C767",
+        fillOpacity: 0.15,
         weight: 2,
       });
       myPolygon2.addTo(map);
